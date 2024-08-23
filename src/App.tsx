@@ -1,11 +1,5 @@
-import NewApp from "./projects/CalculadoraPropinas/src/NewApp";
-
 function App() {
-  return (
-    <>
-      <NewApp />
-    </>
-  );
+  return <></>;
 }
 
 export default App;
