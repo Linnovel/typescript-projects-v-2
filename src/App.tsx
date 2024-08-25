@@ -6,6 +6,7 @@ function App() {
       <CalcuApp />
     </>
   );
+  
 }
 
 export default App;
