@@ -1,11 +1,7 @@
 import CalcuApp from "./projects/CalcuPropinas/src/CalcuApp";
 
 function App() {
-  return (
-    <>
-      <CalcuApp />
-    </>
-  );
+  return <></>;
 }
 
 export default App;
