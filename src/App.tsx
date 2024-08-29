@@ -1,9 +1,11 @@
-import CalcuApp from "./projects/CalcuPropinas/src/CalcuApp";
+// import CalcuApp from "./projects/CalcuPropinas/src/CalcuApp";
+import AppContador from "./projects/ContadorCalorias/src/AppContador";
 
 function App() {
   return (
     <>
-      <CalcuApp />
+      {/* <CalcuApp /> */}
+      <AppContador />
     </>
   );
 }
