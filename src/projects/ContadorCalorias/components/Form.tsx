@@ -1,13 +1,24 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { categories } from "../datadb/categories";
 import { Activity } from "../types";
+// import { Category } from "../types/index";
+import { ActivityActions } from "../../reducers/activityReducer";
 
-const Form = () => {
-  const [activity, setActivity] = useState<Activity>({
-    category: 1,
-    name: "",
-    calories: 0,
-  });
+type formProps = {
+  dispatch: Dispatch<ActivityActions>;
+};
+
+const initialState: Activity = {
+  id: uuidv4(),
+  category: 1,
+  name: "",
+  calories: 0,
+};
+
+const Form = ({ dispatch }: formProps) => {
+  const [activity, setActivity] = useState<Activity>(initialState);
 
   const handleOnChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
@@ -19,9 +30,26 @@ const Form = () => {
     });
   };
 
+  const isValidActivity = () => {
+    const { name, calories } = activity;
+    return name.trim() !== "" && calories > 0;
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch({ type: "save-activity", payload: { newActivity: activity } });
+    setActivity({
+      ...initialState,
+      id: uuidv4(),
+    });
+  };
+
   return (
     <>
-      <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-5 bg-white shadow p-10 rounded-lg"
+      >
         <div className="gird grid-cols-1 gap-3">
           <label htmlFor="category" className="font-bold">
             Categoria:{" "}
@@ -43,7 +71,6 @@ const Form = () => {
           <label htmlFor="name" className="font-bold">
             Actividad:{" "}
           </label>
-
           <input
             value={activity.name}
             id="name"
@@ -69,9 +96,12 @@ const Form = () => {
           />
         </div>
         <input
-          className="bg-gray-800 cursor-pointer hover:bg-gray-900 w-full p-2 font-bold uppercase text-white"
+          className="bg-gray-800 cursor-pointer hover:bg-gray-900 w-full p-2 font-bold uppercase text-white disabled:opacity-10"
           type="submit"
-          value="Guardar comida o Guardar Ejercicio"
+          value={
+            activity.category === 1 ? "Guardar Comida" : "Guardar Ejercicio"
+          }
+          disabled={!isValidActivity()}
         />
       </form>
     </>
