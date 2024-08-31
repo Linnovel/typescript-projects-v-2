@@ -1,13 +1,14 @@
-import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
+import { useState, ChangeEvent, FormEvent, Dispatch, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { categories } from "../datadb/categories";
 import { Activity } from "../types";
 // import { Category } from "../types/index";
-import { ActivityActions } from "../../reducers/activityReducer";
+import { ActivityActions, ActivityState } from "../../reducers/activityReducer";
 
 type formProps = {
   dispatch: Dispatch<ActivityActions>;
+  state: ActivityState;
 };
 
 const initialState: Activity = {
@@ -17,8 +18,17 @@ const initialState: Activity = {
   calories: 0,
 };
 
-const Form = ({ dispatch }: formProps) => {
+const Form = ({ dispatch, state }: formProps) => {
   const [activity, setActivity] = useState<Activity>(initialState);
+
+  useEffect(() => {
+    if (state.activeId) {
+      const selectedActivity = state.activities.filter(
+        (stateActivity) => stateActivity.id === state.activeId
+      )[0];
+      setActivity(selectedActivity);
+    }
+  }, [state.activeId]);
 
   const handleOnChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
@@ -96,7 +106,7 @@ const Form = ({ dispatch }: formProps) => {
           />
         </div>
         <input
-          className="bg-gray-800 cursor-pointer hover:bg-gray-900 w-full p-2 font-bold uppercase text-white disabled:opacity-10"
+          className="bg-gray-800 hover:bg-gray-900  cursor-pointer w-full p-2 font-bold uppercase text-white disabled:opacity-10"
           type="submit"
           value={
             activity.category === 1 ? "Guardar Comida" : "Guardar Ejercicio"
