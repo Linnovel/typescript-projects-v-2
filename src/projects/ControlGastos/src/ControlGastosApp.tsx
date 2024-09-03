@@ -3,6 +3,7 @@ import BudgetForm from "../components/BudgetForm";
 import { useBudget } from "../hooks/useBudget";
 import BudgetTracker from "../components/BudgetTracker";
 import ExpenseModal from "../components/ExpendModals";
+import ExpenseList from "../components/ExpenseList";
 
 const ControlGastosApp = () => {
   const { state } = useBudget();
@@ -22,6 +23,7 @@ const ControlGastosApp = () => {
       {isValidBudget && (
         <main className="max-w-3xl mx-auto py-10">
           <ExpenseModal />
+          <ExpenseList />
         </main>
       )}
     </>
