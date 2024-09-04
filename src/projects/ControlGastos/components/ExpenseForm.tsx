@@ -2,7 +2,7 @@ import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import { categories } from "../data/categoryGastos";
 import DatePicker from "react-date-picker";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { DraftExpense, Value } from "../typesBudget";
 import ErrorMessage from "./ErrorMessage";
 import { useBudget } from "../hooks/useBudget";
@@ -16,7 +16,18 @@ const ExpenseForm = () => {
   });
 
   const [error, setError] = useState("");
-  const { dispatch } = useBudget();
+  const [previewAmount, setPreviewAmount] = useState(0);
+  const { dispatch, state, remainingBudget } = useBudget();
+
+  useEffect(() => {
+    if (state.editingId) {
+      const editingExpense = state.expenses.filter(
+        (currentExpense) => currentExpense.id === state.editingId
+      )[0];
+      setExpense(editingExpense);
+      setPreviewAmount(editingExpense.amount);
+    }
+  }, [state.editingId]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
@@ -44,8 +55,22 @@ const ExpenseForm = () => {
       setError("todos los campons son obligatorios");
       return;
     }
+
+    //no pase del limite
+    if (expense.amount > remainingBudget) {
+      setError("Se sale del presupuesto");
+      return;
+    }
+
     // Agregar un nuevo gasto
-    dispatch({ type: "add-expense", payload: { expense } });
+    if (state.editingId) {
+      dispatch({
+        type: "update-expense",
+        payload: { expense: { id: state.editingId, ...expense } },
+      });
+    } else {
+      dispatch({ type: "add-expense", payload: { expense } });
+    }
 
     //reiniciar el estate
     setExpense({
@@ -54,13 +79,14 @@ const ExpenseForm = () => {
       category: "",
       date: new Date(),
     });
+    setPreviewAmount(0);
   };
 
   return (
     <>
       <form className="space-y-5" onSubmit={handleSubmit}>
         <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2 ">
-          Nuevo Gastos
+          {state.editingId ? "Guardar Cambios" : "Nuevo Gastos"}
         </legend>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <div className="flex flex-col gap-2">
@@ -123,7 +149,7 @@ const ExpenseForm = () => {
           />
         </div>
         <input
-          value={"Registrar Gastos"}
+          value={state.editingId ? "Guardar Cambios" : "Registrar Gasto"}
           type="submit"
           className="bg-blue-600  cursor-pointer w-full p-2 uppercase text-white font-bold rounded-lg"
         />
