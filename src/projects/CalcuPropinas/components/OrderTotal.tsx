@@ -1,14 +1,15 @@
-import { useCallback } from "react";
+import { Dispatch, useCallback } from "react";
 import { OrderItem } from "../types";
 import { formatCurrency } from "../../../helpers";
+import { OrderActions } from "../../../reducers/order-reducer";
 
 type OrderTotalProps = {
   order: OrderItem[];
   tip: number;
-  placeOrder: () => void;
+  dispatch: Dispatch<OrderActions>;
 };
 
-const OrderTotal = ({ order, tip, placeOrder }: OrderTotalProps) => {
+const OrderTotal = ({ order, tip, dispatch }: OrderTotalProps) => {
   const subTotalAmount = useCallback(
     () =>
       order.reduce(
@@ -44,7 +45,7 @@ const OrderTotal = ({ order, tip, placeOrder }: OrderTotalProps) => {
       <button
         className="font-bold disabled:opacity-10 mt-10 w-full bg-black p-3 uppercase text-white "
         disabled={totalAmount() === 0}
-        onClick={placeOrder}
+        onClick={() => dispatch({ type: "place-order" })}
       >
         Guardar Orden
       </button>
