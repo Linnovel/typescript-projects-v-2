@@ -1,5 +1,6 @@
 // import CalcuApp from "./projects/CalcuPropinas/src/CalcuApp";
-import ControlGastosApp from "./projects/ControlGastos/src/ControlGastosApp";
+import AdminPacientes from "./projects/AdminPacientes/src/AdminPacientes";
+// import ControlGastosApp from "./projects/ControlGastos/src/ControlGastosApp";
 // import AppContador from "./projects/ContadorCalorias/src/AppContador";
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <>
       {/* <CalcuApp /> */}
       {/* <AppContador /> */}
-      <ControlGastosApp />
+      {/* <ControlGastosApp /> */}
+      <AdminPacientes />
     </>
   );
 }
