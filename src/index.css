@@ -15,3 +15,16 @@
 .swipeable-list .swipe-action {
   @apply flex justify-center items-center;
 }
+:root {
+  --white: #fff;
+  --primary: #f59e0b;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Outfit", sans-serif;
+  color: var(--white);
+  font-size: 2rem;
+}
