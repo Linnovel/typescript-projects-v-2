@@ -2,12 +2,19 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { countries } from "../../data/indexClima";
 import styles from "./FormWheather.module.css";
 import type { SearchTypes } from "../../types";
+import Alert from "../Alert/Alert";
 
-const FormWheather = () => {
+type FormProps = {
+  fetchWeather: (search: SearchTypes) => Promise<void>;
+};
+
+const FormWheather = ({ fetchWeather }: FormProps) => {
   const [search, setSearch] = useState<SearchTypes>({
     city: "",
     country: "",
   });
+
+  const [alert, setAlert] = useState("");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
@@ -21,8 +28,10 @@ const FormWheather = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (Object.values(search).includes("")) {
-      console.log("hay campos vacios");
+      setAlert("Todos los campos son obligatorios");
+      return;
     }
+    fetchWeather(search);
   };
 
   return (
@@ -39,6 +48,7 @@ const FormWheather = () => {
             value={search.city}
           />
         </div>
+        {alert && <Alert>{alert}</Alert>}
         <div className={styles.field}>
           <label htmlFor="pais">Pais:</label>
           <select
@@ -65,4 +75,4 @@ const FormWheather = () => {
   );
 };
 
-// export default FormWheather;
+export default FormWheather;

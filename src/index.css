@@ -26,6 +26,7 @@ html {
 body {
   font-family: "Outfit", sans-serif;
   font-size: 2rem;
+  color: "white";
   background-size: cover;
   background-image: url("https://static.nationalgeographic.es/files/styles/image_3200/public/01_20.jpg?w=1600&h=1068");
 }
