@@ -2,8 +2,9 @@
 // import AdminPacientes from "./projects/AdminPacientes/src/AdminPacientes";
 // import ControlGastosApp from "./projects/ControlGastos/src/ControlGastosApp";
 // import AppContador from "./projects/ContadorCalorias/src/AppContador";
+// import ClimaApp from "./projects/ClimaApp/src/ClimaApp";
 
-import ClimaApp from "./projects/ClimaApp/src/ClimaApp";
+import CriptoApp from "./projects/CotizadorCripto/src/CriptoApp";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       {/* <AppContador /> */}
       {/* <ControlGastosApp /> */}
       {/* <AdminPacientes /> */}
-      <ClimaApp />
+      {/* <ClimaApp /> */}
+      <CriptoApp />
     </>
   );
 }
