@@ -17,17 +17,45 @@
 }
 :root {
   --white: #fff;
-  --primary: #f59e0b;
+  --primary: #61ecbc;
+  --black: #182339;
 }
 
 html {
   font-size: 62.5%;
-  color: var(--white);
 }
+
 body {
-  font-family: "Outfit", sans-serif;
-  font-size: 2rem;
-  color: "white";
+  background-image: url("/public/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("https://static.nationalgeographic.es/files/styles/image_3200/public/01_20.jpg?w=1600&h=1068");
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 60rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 3.8rem;
+  margin-top: 5rem;
+  color: var(--white);
+  line-height: 0.8;
+}
+
+.app-title span {
+  display: block;
+  color: var(--primary);
+  font-size: 4.4rem;
+}
+
+.content {
+  margin-top: 5rem;
+  padding: 6rem 2rem;
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
