@@ -4,7 +4,8 @@
 // import AppContador from "./projects/ContadorCalorias/src/AppContador";
 // import ClimaApp from "./projects/ClimaApp/src/ClimaApp";
 
-import CriptoApp from "./projects/CotizadorCripto/src/CriptoApp";
+import DrinkerApp from "./projects/BuscadorDeBebidas/src/DrinkerApp";
+// import CriptoApp from "./projects/CotizadorCripto/src/CriptoApp";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       {/* <ControlGastosApp /> */}
       {/* <AdminPacientes /> */}
       {/* <ClimaApp /> */}
-      <CriptoApp />
+      {/* <CriptoApp /> */}
+      <DrinkerApp />
     </>
   );
 }
