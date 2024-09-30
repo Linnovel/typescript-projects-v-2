@@ -1,9 +1,7 @@
-import HeaderDrink from "../components/HeaderDrink";
-
 const IndexPage = () => {
   return (
     <>
-      <HeaderDrink />
+      <h1>Inicio</h1>
     </>
   );
 };

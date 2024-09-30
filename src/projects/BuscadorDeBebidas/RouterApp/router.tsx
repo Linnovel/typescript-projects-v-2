@@ -9,7 +9,7 @@ const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<LayoutDrink />}>
-            <Route path="/" element={<IndexPage />} />
+            <Route path="/" element={<IndexPage />} index />
             <Route path="/favoritos" element={<FavoritePage />} />
           </Route>
         </Routes>
