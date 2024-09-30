@@ -1,7 +1,13 @@
+import { Outlet } from "react-router-dom";
+import HeaderDrink from "../components/HeaderDrink";
+
 const LayoutDrink = () => {
   return (
     <>
-      <h1>hola</h1>
+      <HeaderDrink />
+      <main className="container mx-auto py-16">
+        <Outlet />
+      </main>
     </>
   );
 };

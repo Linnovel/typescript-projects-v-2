@@ -1,9 +1,7 @@
-import HeaderDrink from "../components/HeaderDrink";
-
 const FavoritePage = () => {
   return (
     <>
-      <HeaderDrink />
+      <h1>Favoritos</h1>
     </>
   );
 };
