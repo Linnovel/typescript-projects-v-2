@@ -5,3 +5,5 @@ export const CategoriesAPIResponseSchema = z.object({
         strCategory: z.string()
     }))
 })
+
+

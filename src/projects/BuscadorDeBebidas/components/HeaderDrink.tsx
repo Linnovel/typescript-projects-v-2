@@ -1,8 +1,13 @@
-import { useEffect, useMemo } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppStore } from "../store/useAppStore";
 
 const HeaderDrink = () => {
+  const [searchFilters, setSearchFilters] = useState({
+    ingredient: "",
+    category: "",
+  });
+
   const { pathname } = useLocation();
 
   const isHome = useMemo(() => pathname === "/", [pathname]);
@@ -11,9 +16,20 @@ const HeaderDrink = () => {
     (state) => state.fetchCategoriesDrink
   );
 
+  const categoriesDrink = useAppStore((state) => state.categories);
+
   useEffect(() => {
     fetchCategoriesDrink();
   }, []);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSearchFilters({
+      ...searchFilters,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <>
@@ -64,9 +80,10 @@ const HeaderDrink = () => {
                 <input
                   className="p-3 w-full rounded-lg focus:outline-none"
                   type="text"
-                  placeholder="Nombre o ingrediente. Ej. Vodka, Tequila"
                   name="ingredient"
                   id="ingredient"
+                  onChange={handleChange}
+                  value={searchFilters.ingredient}
                 />
               </div>
               <div className="space-y-4 ">
@@ -80,9 +97,19 @@ const HeaderDrink = () => {
                   className="p-3 w-full rounded-lg focus:outline-none"
                   name="category"
                   id="category"
+                  onChange={handleChange}
+                  value={searchFilters.category}
                 >
                   {" "}
                   <option value="">--Seleccione --</option>
+                  {categoriesDrink.drinks.map((cateogries) => (
+                    <option
+                      value={cateogries.strCategory}
+                      key={cateogries.strCategory}
+                    >
+                      {cateogries.strCategory}
+                    </option>
+                  ))}
                 </select>
               </div>
               <input
