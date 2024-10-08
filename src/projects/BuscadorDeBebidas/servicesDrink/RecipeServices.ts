@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CategoriesAPIResponseSchema } from '../UtilsDrinks/recipes-shemma';
+import { SearchFilter } from '../typesDrink';
 
 
 export async function getCategories() {
@@ -15,4 +16,18 @@ export async function getCategories() {
         return result.data
     }
 
+}
+
+export async function getRecipies(filters: SearchFilter){
+
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filters.category}&i=${filters.ingredient}`
+    const {data } = await axios(url)
+
+    console.log(data)
+    // const result = CategoriesAPIResponseSchema.safeParse(data)
+    // console.log(result)
+    
+    // if(result.success){
+    //     return result.data
+    // }
 }
