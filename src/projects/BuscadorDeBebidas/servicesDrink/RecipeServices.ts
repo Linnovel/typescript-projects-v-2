@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CategoriesAPIResponseSchema } from '../UtilsDrinks/recipes-shemma';
+import { CategoriesAPIResponseSchema, DrinksApiResponse } from '../UtilsDrinks/recipes-shemma';
 import { SearchFilter } from '../typesDrink';
 
 
@@ -24,10 +24,11 @@ export async function getRecipies(filters: SearchFilter){
     const {data } = await axios(url)
 
     console.log(data)
-    // const result = CategoriesAPIResponseSchema.safeParse(data)
-    // console.log(result)
+    const result = DrinksApiResponse.safeParse(data)
+    console.log(result)
     
-    // if(result.success){
-    //     return result.data
-    // }
+    if(result.success){
+        return result.data
+    }
 }
+
