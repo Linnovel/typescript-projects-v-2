@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import HeaderDrink from "../components/HeaderDrink";
+import Modal from "../components/Modal";
 
 const LayoutDrink = () => {
   return (
@@ -8,6 +9,7 @@ const LayoutDrink = () => {
       <main className="container mx-auto py-16">
         <Outlet />
       </main>
+      <Modal />
     </>
   );
 };
